@@ -14,7 +14,7 @@
   "private": true,
   "ngPackage": {
     "lib": {
-      "entryFile": "./index.ts"
+      "entryFile": "./src/index.ts"
     }
   },
   "devDependencies": {
