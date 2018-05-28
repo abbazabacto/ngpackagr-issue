@@ -1,6 +1,6 @@
 # NgpackagrIssue
 
-This project was created to demonstrate an issue with `ng-packagr`, using path alias results into a failing package build.
+This project was created to demonstrate an issue with `ng-packagr`, how to structure the primary and secondary entry points under `src` folder
 
 Path alias in ```src/tsconfig.json```:
 ```json
@@ -8,7 +8,7 @@ Path alias in ```src/tsconfig.json```:
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@abbazabacto/ngpackagr-issue/*": ["./*"]
+      "@abbazabacto/ngpackagr-issue/*": ["./src/*"]
     }
   }
 }
@@ -35,11 +35,4 @@ It throws an warning:
 ```
 Warning: Can't resolve all parameters for FooService in ~/ngpackagr-issue/foo/foo.service.ts: (?, ?). This will become an error in Angular v6.x
 Warning: Can't resolve all parameters for FooService in ~/ngpackagr-issue/foo/foo.service.ts: (?, ?). This will become an error in Angular v6.x
-```
-
-But in the real project the same issue resolves into a less detectable:
-```
-BUILD ERROR
-Cannot read property 'isSkipSelf' of null
-TypeError: Cannot read property 'isSkipSelf' of null
 ```
