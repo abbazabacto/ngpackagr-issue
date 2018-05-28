@@ -1,0 +1,14 @@
+{
+  "$schema": "../node_modules/ng-packagr/package.schema.json",
+  "name": "@abbazabacto/ngpackagr-issue",
+  "version": "0.0.0",
+  "private": true,
+  "ngPackage": {
+    "lib": {
+      "entryFile": "./index.ts"
+    }
+  },
+  "peerDependencies": {
+    "@angular/core": "^6.0.2"
+  }
+}

@@ -1,22 +1,17 @@
 {
   "$schema": "./node_modules/ng-packagr/package.schema.json",
-  "name": "@abbazabacto/ngpackagr-issue",
+  "name": "ngpackagr-issue-src",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "ng-packagr": "ng-packagr -p package.json",
+    "ng-packagr": "ng-packagr -p src/package.json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
   "private": true,
-  "ngPackage": {
-    "lib": {
-      "entryFile": "./src/index.ts"
-    }
-  },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.3",
     "@angular/animations": "^6.0.2",
