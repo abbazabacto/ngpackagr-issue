@@ -1,38 +1,57 @@
 # NgpackagrIssue
 
-This project was created to demonstrate an issue with `ng-packagr`, how to structure the primary and secondary entry points under `src` folder
+This project was created to demonstrate an issue with `ng-packagr` for re-exporting secondary endpoints in the primary endpoint like `@angular/material` does:
 
-Path alias in ```src/tsconfig.json```:
+If you run the following commands
+
+```sh
+yarn install
+yarn ng-packagr
+yarn build --prod
+```
+
+You will see an error:
+
+```sh
+ERROR in : Unexpected value 'CoreModule in ~/ngpackagr-issue/dist/abbazabacto-ngpackagr-issue.d.ts' imported by the module 'AppModule in ~/ngpackagr-issue/demo/app/app.module.ts'. Please add a @NgModule annotation.
+```
+
+The metadata looks incomplete, as there is no reference to the `CoreModule` of `@abbazabacto/ngpackagr-issue/core`:
 ```json
 {
-  "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "@abbazabacto/ngpackagr-issue/*": ["./src/*"]
+  "__symbolic": "module",
+  "version": 4,
+  "exports": [
+    {
+      "from": "@abbazabacto/ngpackagr-issue/foo"
     }
-  }
+  ],
+  "metadata": {},
+  "origins": {},
+  "importAs": "@abbazabacto/ngpackagr-issue"
 }
 ```
 
-There are two modules **Core** and **Foo**, **Foo** dependends on **Core**'s config and service.
+If I remove the `CoreModule` import in the demo application, the error disappears. So it seemed the `@abbazabacto/ngpackagr-issue/foo` reference is working.
 
-The path alias seems to work fine when running the dummy application in `src` using the modules directly:
-```
-yarn start
+If I add the missing reference of `@abbazabacto/ngpackagr-issue/core` to the metadata file manually, the build also succeeds.
+
+```json
+{
+  "__symbolic": "module",
+  "version": 4,
+  "exports": [
+    {
+      "from": "@abbazabacto/ngpackagr-issue/core"
+    },
+    {
+      "from": "@abbazabacto/ngpackagr-issue/foo"
+    }
+  ],
+  "metadata": {},
+  "origins": {},
+  "importAs": "@abbazabacto/ngpackagr-issue"
+}
 ```
 
-The path alias seems to work fine when building the application in `src` using the modules directly:
-```
-yarn build
-```
-
-The path alias breaks DI when building the package:
-```
-yarn ng-packagr
-```
-
-It throws an warning:
-```
-Warning: Can't resolve all parameters for FooService in ~/ngpackagr-issue/foo/foo.service.ts: (?, ?). This will become an error in Angular v6.x
-Warning: Can't resolve all parameters for FooService in ~/ngpackagr-issue/foo/foo.service.ts: (?, ?). This will become an error in Angular v6.x
-```
+It has nothing to do with `FooModule` depending on `CoreModule`, when all references between each other are removed the generated metadata is still incomplete.
