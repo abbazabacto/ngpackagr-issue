@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CoreConfig } from '@abbazabacto/ngpackagr-issue/core';
-import { FooService } from '@abbazabacto/ngpackagr-issue/foo';
+import { CoreConfig, FooService } from '@abbazabacto/ngpackagr-issue';
 
 @Component({
   selector: 'app-root',

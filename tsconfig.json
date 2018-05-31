@@ -17,7 +17,8 @@
       "dom"
     ],
     "paths": {
-      "@abbazabacto/ngpackagr-issue/*": ["./src/*"]
+      "@abbazabacto/ngpackagr-issue": ["./dist"],
+      "@abbazabacto/ngpackagr-issue/*": ["./dist/*"]
     }
   }
 }

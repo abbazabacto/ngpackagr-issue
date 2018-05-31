@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FooModule } from '@abbazabacto/ngpackagr-issue/foo';
+import { CoreModule, FooModule } from '@abbazabacto/ngpackagr-issue';
 
 import { AppComponent } from './app.component';
 
@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
   imports: [
     CommonModule,
     BrowserModule,
+    CoreModule,
     FooModule
   ],
   providers: [],
